@@ -17,15 +17,7 @@ node () {
 			} 
  		} 
 	}
-	stage('Quality check') {
 
-  withSonarQubeEnv('Sonar') {
-
-    bat "mvn sonar:sonar"
-
-   }
-
-}
 	stage ('App-IC - Post build actions') {
 /*
 Please note this is a direct conversion of post-build actions. 
@@ -36,5 +28,14 @@ A logic review is suggested.
 		step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'jenkins.orsys@gmail.com', sendToIndividuals: false])
  
 	}
+		stage('Quality check') {
+
+  withSonarQubeEnv('Sonar') {
+
+    bat "mvn sonar:sonar"
+
+   }
+
+}
 }
 }
